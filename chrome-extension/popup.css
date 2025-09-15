@@ -1,0 +1,830 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Coiny:wght@400&display=swap');
+
+:root {
+  /* Dark theme colors matching the website */
+  --background: #0d0d0d;
+  --foreground: #f8fafc;
+  --card: #1a1a1a;
+  --card-foreground: #f8fafc;
+  --primary: #5227ff;
+  --primary-foreground: #ffffff;
+  --secondary: #262626;
+  --muted: #262626;
+  --muted-foreground: #a1a1aa;
+  --border: #404040;
+  --input: #262626;
+  --ring: #5227ff;
+  --primary-transparent: rgba(82, 39, 255, 0.3);
+  --ghost-purple: #8B5CF6;
+  --ghost-green: #10B981;
+  --ghost-amber: #F59E0B;
+}
+
+body {
+  width: 400px;
+  min-height: 600px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--background) !important;
+  color: var(--foreground);
+  overflow: hidden;
+}
+
+html {
+  background: var(--background) !important;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--background) !important;
+}
+
+/* Header */
+.header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 20px;
+  position: relative;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--foreground);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--primary);
+  filter: drop-shadow(0 0 8px var(--primary-transparent));
+}
+
+.logo h1 {
+  font-size: 22px;
+  font-weight: 400;
+  font-family: 'Coiny', system-ui;
+  color: var(--primary);
+}
+
+/* Search Section */
+.search-section {
+  padding: 24px;
+  flex: 1;
+  background: var(--background);
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 60px 16px 20px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  background: var(--input);
+  color: var(--foreground);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.search-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-transparent), 0 4px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary);
+  border: none;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--primary-transparent);
+}
+
+.search-btn:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 16px var(--primary-transparent);
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-foreground);
+}
+
+/* Settings */
+.settings {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.settings::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--primary);
+  opacity: 0.3;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.setting-row:last-child {
+  margin-bottom: 0;
+}
+
+.setting-row label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--card-foreground);
+  flex: 1;
+}
+
+.select {
+  padding: 8px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--input);
+  color: var(--foreground);
+  font-size: 13px;
+  min-width: 120px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-transparent);
+}
+
+.range {
+  flex: 1;
+  margin-left: 16px;
+  accent-color: var(--primary);
+  height: 6px;
+  border-radius: 3px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--card-foreground);
+}
+
+.checkbox {
+  margin-right: 10px;
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+}
+
+/* Enhanced Loading with Ghost Animation */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  color: var(--foreground);
+  text-align: center;
+  flex: 1;
+  background: var(--background);
+}
+
+.ghost-container {
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.ghost-animation {
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+.ghost {
+  font-size: 80px;
+  display: block;
+  animation: bounce 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px var(--primary-transparent));
+}
+
+.ghost-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, var(--primary-transparent) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.loading-text h2 {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  font-family: 'Coiny', system-ui;
+  color: var(--primary);
+}
+
+.loading-text p {
+  font-size: 14px;
+  color: var(--muted-foreground);
+  margin-bottom: 32px;
+}
+
+.loading-step {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+.step-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.5s ease;
+}
+
+.step-content.completed {
+  background: var(--card);
+  border-color: var(--ghost-green);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+#stepText {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.step-indicator {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top: 3px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.step-checkmark {
+  width: 24px;
+  height: 24px;
+  background: var(--ghost-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.step-checkmark svg {
+  width: 14px;
+  height: 14px;
+  color: white;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.progress-container {
+  width: 100%;
+  max-width: 320px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+  width: 0%;
+}
+
+/* Results */
+.results {
+  background: var(--background);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+.results-header h3 {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--card-foreground);
+  font-family: 'Coiny', system-ui;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: var(--secondary);
+  transform: scale(1.05);
+}
+
+.back-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.results-list {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.product-item {
+  display: flex;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: var(--background);
+}
+
+.product-item:hover {
+  background: var(--card);
+  transform: translateX(4px);
+}
+
+.product-item:last-child {
+  border-bottom: none;
+}
+
+.product-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: contain;
+  margin-right: 16px;
+  background: var(--card);
+  padding: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.product-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.product-rating {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stars {
+  color: var(--ghost-amber);
+}
+
+.view-more-btn {
+  margin: 20px;
+  padding: 16px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px var(--primary-transparent);
+}
+
+.view-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--primary-transparent);
+}
+
+/* Error */
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  color: var(--foreground);
+  text-align: center;
+  flex: 1;
+  background: var(--background);
+}
+
+.error-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.error p {
+  margin-bottom: 24px;
+  color: var(--muted-foreground);
+  font-size: 15px;
+}
+
+.retry-btn {
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 2px solid var(--border);
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.retry-btn:hover {
+  background: var(--secondary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Scrollbar */
+.results-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.results-list::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+.results-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.results-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+/*
+ Additional modern improvements */
+.progress-info {
+  font-size: 13px;
+  color: var(--muted-foreground);
+}
+
+#stepText {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--foreground);
+}
+
+/* Improved focus states */
+.search-input:focus,
+.select:focus {
+  outline: none;
+}
+
+/* Better button states */
+.search-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.view-more-btn:active,
+.retry-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.2s ease;
+}
+
+/* Enhanced ghost animation */
+.ghost {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.ghost:hover {
+  transform: scale(1.1);
+}
+
+/* Improved loading state animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.loading-shimmer {
+  background: rgba(82, 39, 255, 0.1);
+  animation: shimmer 2s infinite;
+}
+
+/* Enhanced button hover effects */
+.search-btn:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 20px var(--primary-transparent);
+}
+
+.view-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--primary-transparent);
+}
+
+/* Better focus states for accessibility */
+.search-input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-transparent);
+}
+
+/* Improved scrollbar styling */
+.results-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.results-list::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 3px;
+}
+
+.results-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.results-list::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Better visual feedback for product items */
+.product-item {
+  border-left: 3px solid transparent;
+}
+
+.product-item:hover {
+  border-left-color: var(--primary);
+}
+
+/* Improved loading state visual feedback */
+.loading-step {
+  position: relative;
+}
+
+.loading-step::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.loading-step.active::before {
+  opacity: 1;
+}
+
+/* Better spacing and typography */
+.setting-row label {
+  letter-spacing: 0.01em;
+}
+
+/* Enhanced visual hierarchy */
+.results-header {
+  position: relative;
+}
+
+.results-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: var(--primary);
+  opacity: 0.3;
+}
+
+/* Enhanced product item styling */
+.product-item {
+  position: relative;
+}
+
+.product-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.product-item:hover::before {
+  background: var(--primary);
+}
+
+/* Better image loading state */
+.product-image {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.product-image:hover {
+  transform: scale(1.05);
+}
+
+/* Enhanced price styling */
+.product-price {
+  position: relative;
+}
+
+.product-price::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 1px;
+  opacity: 0.3;
+}
+
+/* Better merchant badge styling */
+.product-item .merchant-badge {
+  background: var(--primary)/10;
+  color: var(--primary);
+  border: 1px solid var(--primary)/20;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Force dark theme overrides */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure all sections have proper dark background */
+.search-section,
+.loading,
+.results,
+.error {
+  background: var(--background) !important;
+}
+
+/* Override any potential browser defaults */
+div, section, main {
+  background: inherit;
+}
